@@ -1,0 +1,11 @@
+File data về thông tin của hero Pudge qua các trận đấu dota. Các biến gồm có
+kills: số mạng giết được trong game đó
+deaths: số lần chết trong game
+assists: số mạng hỗ trợ đồng đội giết đc trong game
+last_hits: số lính CPU(gồm cả creep lane và quái rừng) giết được trong game
+denies: số lính đồng mình deny được trong game
+gpm: số vàng kiếm được mỗi phút
+xpm: kinh nghiệm có được mỗi phút
+duration: thời lượng game, tính bằng giây
+skill: trình độ của người chơi (1 - normal, 2 - high, 3 - very high)
+match_result: kết quả trận (0 - thắng, 1 - thua)
