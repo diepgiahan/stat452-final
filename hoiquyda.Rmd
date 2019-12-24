@@ -69,3 +69,29 @@ Khoảng ước lượng 90% cho hệ số $\beta_3:[0.03618771, 0.04064212]$
 ```{R}
 anova(model_3)
 ```
+Với mô hình được ước lượng trên, gọi pred là kết quả $\widehat{\text{match\_result}}$ với threshold là 0.5, ta được:
+```{R}
+pred<-0.763233 - 0.072295 * deaths + 0.038415 * kills
+threshold<-0.5
+pred[pred < threshold]<- 0
+pred[pred >= threshold]<- 1
+```
+Biểu diễn kết quả dự đoán với dữ liệu thực tế trên không gian 3 chiều với trục x là deaths, y là match_result (màu vàng, bán kính là 5) hoặc kết quả dự đoán của match_result (màu đỏ với bán kính là 6.5) và z là kills. Trên hình biểu diễn, những điểm đỏ tượng trưng cho kết quả dự đoán bị trật so với dữ liệu, điểm vàng là giá trị thực tế của những kết quả dự đoán sai đó và những điểm "đỏ bọc vàng" phản ánh mô hình dự đoán đúng kết quả của những trận game này. Trong đó số lượng điểm biểu diễn mô hình dự đoán đúng chiếm ưu thế trội hơn hẳn.
+```{R}
+library("rgl")
+rgl.open()
+par3d(windowRect = c(20, 30, 800, 800))
+rgl.bg(color="white")
+rgl.points(deaths, match_result, kills, color ="yellow", size = 5)
+rgl.points(deaths, pred, kills, color ="red", size = 6.5)
+rgl.bbox(color = "#333377")
+rgl.viewpoint(  zoom = .5 )
+aspect3d(5,1,5)
+```
+![ScreenshotPlot](stat2.PNG)
+
+Khoảng cách Eclidean L2 của mô hình (đặt threshold là 0.5) với dữ liệu là 33.24154 trên tập gồm 6000 dữ liệu.
+```{R}
+dist(rbind(pred,match_result))
+length(match_result)
+```
